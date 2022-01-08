@@ -1,50 +1,82 @@
-package pojos;
+package requestPojos;
 
-public class createIssuePojo {
-    private String status;
-    private String place_id;
-    private String scope;
-    private String reference;
-    private String id;
+import java.util.List;
 
-    public String getStatus() {
-        return status;
+public class CreateIssuePojo {
+    private LocationPojo location;
+    private int accuracy;
+    private String name;
+    private String phone_number;
+    private String address;
+    private List<String> types;
+    private String website;
+    private String language;
+
+    public LocationPojo getLocation() {
+        return location;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setLocation(LocationPojo location) {
+        this.location = location;
     }
 
-    public String getPlace_id() {
-        return place_id;
+    public int getAccuracy() {
+        return accuracy;
     }
 
-    public void setPlace_id(String place_id) {
-        this.place_id = place_id;
+    public void setAccuracy(int accuracy) {
+        this.accuracy = accuracy;
     }
 
-    public String getScope() {
-        return scope;
+    public String getName() {
+        return name;
     }
 
-    public void setScope(String scope) {
-        this.scope = scope;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getReference() {
-        return reference;
+    public String getPhone_number() {
+        return phone_number;
     }
 
-    public void setReference(String reference) {
-        this.reference = reference;
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 
-    public String getId() {
-        return id;
+    public String getAddress() {
+        return address;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setAddress(String address) {
+        this.address = address;
     }
+
+    public List<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(List<String> types) {
+        this.types = types;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+
+
 }
 
