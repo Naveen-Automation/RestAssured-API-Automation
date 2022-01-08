@@ -1,7 +1,7 @@
 package JavaObjectsToJson;
 
 import io.cucumber.datatable.DataTable;
-import requestPojos.CreateIssuePojo;
+import requestPojos.CreateSalesOrderPojo;
 import requestPojos.LocationPojo;
 
 import java.io.IOException;
@@ -13,7 +13,7 @@ import static java.lang.Integer.parseInt;
 
 public class RequestBuilder {
 
-   public CreateIssuePojo createIssue(int iterations, DataTable dataTable) throws IOException {
+   public CreateSalesOrderPojo createIssue(int iterations, DataTable dataTable) throws IOException {
 
       String resource;
       int statusCode;
@@ -22,7 +22,7 @@ public class RequestBuilder {
 
       List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
 
-      CreateIssuePojo ci = new CreateIssuePojo();
+      CreateSalesOrderPojo ci = new CreateSalesOrderPojo();
       LocationPojo lctn = new LocationPojo();
 
       String[] arr  = table.get(iterations).get("ReqBdy_Types").split("#,#");

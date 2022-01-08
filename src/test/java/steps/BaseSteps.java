@@ -25,12 +25,12 @@ public class BaseSteps {
     ResponseSpecification resSpec;
 
 
-    public RequestSpecification RequestSpecification() throws IOException {
-
+    public RequestSpecification RequestSpecification() throws IOException
+    {
         if (reqSpec == null)
         {
             String baseUri = IniFileManager.GetKeyValue("Jira", "SITBaseURI", System.getProperty("user.dir") + environmentFilePath);
-            PrintStream log = new PrintStream(new FileOutputStream(System.getProperty("user.dir") + "//src//test//resources//Logs//logging.txt"));
+            PrintStream log = new PrintStream(new FileOutputStream(System.getProperty("user.dir") + "//src//test//resources//Logs//" + "logging.txt"));
             expKey = IniFileManager.GetKeyValue("Jira", "accessKey", System.getProperty("user.dir") + environmentFilePath);
             reqSpec = new RequestSpecBuilder()
                     .setContentType(ContentType.JSON).setBaseUri(baseUri).addQueryParam("key", expKey)
@@ -42,7 +42,8 @@ public class BaseSteps {
         return reqSpec;
     }
 
-    public ResponseSpecification ResponseSpecification(){
+    public ResponseSpecification ResponseSpecification()
+    {
         expServer = "Apache/2.4.18 (Ubuntu)";
         return resSpec = new ResponseSpecBuilder().expectContentType(ContentType.JSON).expectHeader("server" ,expServer).build();
     }

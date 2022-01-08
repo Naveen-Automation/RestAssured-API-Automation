@@ -9,7 +9,8 @@ public class IniFileManager {
     private static FileReader file;
 
 
-    public static String GetKeyValue(String pageName, String keyName, String filePath) throws IOException {
+    public static String GetKeyValue(String pageName, String keyName, String filePath) throws IOException
+    {
         ini = new Ini();
         file = new FileReader(filePath);
         ini.load(file);

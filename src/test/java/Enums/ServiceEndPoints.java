@@ -1,4 +1,4 @@
-package APIEndPoints;
+package Enums;
 
 public enum ServiceEndPoints {
 

@@ -27,7 +27,7 @@ Body:
     "language": "English-UK"
 }
 HTTP/1.1 200 OK
-Date: Sat, 08 Jan 2022 21:50:00 GMT
+Date: Sat, 08 Jan 2022 22:12:26 GMT
 Server: Apache/2.4.18 (Ubuntu)
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: POST
@@ -40,10 +40,10 @@ Content-Type: application/json;charset=UTF-8
 
 {
     "status": "OK",
-    "place_id": "9234d2430a4ade81a50b6c7dfd203987",
+    "place_id": "3df1e04b04b04fbf89a3e7081028d28f",
     "scope": "APP",
-    "reference": "bae63fb919c89402d5003df627002dcfbae63fb919c89402d5003df627002dcf",
-    "id": "bae63fb919c89402d5003df627002dcf"
+    "reference": "02dc7784237f39f96767ba2bc2050f0602dc7784237f39f96767ba2bc2050f06",
+    "id": "02dc7784237f39f96767ba2bc2050f06"
 }
 Request method:	POST
 Request URI:	https://rahulshettyacademy.com/maps/api/place/add/json?key=qaclick123
@@ -74,7 +74,7 @@ Body:
     "language": "English-Brit"
 }
 HTTP/1.1 200 OK
-Date: Sat, 08 Jan 2022 21:50:01 GMT
+Date: Sat, 08 Jan 2022 22:12:29 GMT
 Server: Apache/2.4.18 (Ubuntu)
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: POST
@@ -87,8 +87,8 @@ Content-Type: application/json;charset=UTF-8
 
 {
     "status": "OK",
-    "place_id": "9de47f59e452d9caa622d0e4f11a37c5",
+    "place_id": "0d4978f142feebe30604b788f1969774",
     "scope": "APP",
-    "reference": "ce0ac49ed6384d9d150915f27e6cce77ce0ac49ed6384d9d150915f27e6cce77",
-    "id": "ce0ac49ed6384d9d150915f27e6cce77"
+    "reference": "0c7bb7c55a4b0a41277ff56cc2dafa380c7bb7c55a4b0a41277ff56cc2dafa38",
+    "id": "0c7bb7c55a4b0a41277ff56cc2dafa38"
 }

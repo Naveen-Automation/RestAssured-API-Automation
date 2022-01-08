@@ -72,17 +72,15 @@ Feature: Sales Order Journey
   @sanity
   Scenario Outline: Validate that the user is able to create a sales order
     Given the user authenticates using ".json"
-    And the user creates a http post request using below details <Iterations>
+    And the user creates a json body for the http "post" request using below details <Iterations>
       | ReqHdr_ | ReqQpm_ | ReqPpm_ | ReqBdy_Lat | ReqBdy_Lng | ReqBdy_Accuracy | ReqBdy_Name      | ReqBdy_PhoneNumber | ReqBdy_Address                 | ReqBdy_Types   | ReqBdy_Website    | ReqBdy_Language |
       | N/A     | N/A     | N/A     | 38         | 40         | 50              | Veerankis Villah | 9911588999         | 1 The Queen, Windsor Castle,UK | Castle#,#House | http://google.com | English-UK      |
       | N/A     | N/A     | N/A     | 1          | 3          | 3               | Naveens Villah   | 1234567890         | 1 The Queen, Windsor Castle,UK | Castle#,#House | http://google.com | English-Brit    |
 
-    When the user calls "abc" API by hitting below end point
-      | EndPoint                 |
-      | /maps/api/place/add/json |
-      | /maps/api/place/add/json |
+    When the user calls "CheckOut" API with "Post" http request
+
     Then the user should get the status code as 200
-    And response "Json" should match below details
+    And response "Json" should match below details <Iterations>
       | ResHdr_Address | ResHdr_Id | ResBdy_ExpScope | ResBdy_ExpServer       |
       | N/A            | N/A       | APP             | Apache/2.4.18 (Ubuntu) |
       | N/A            | N/A       | APP             | Apache/2.4.18 (Ubuntu) |

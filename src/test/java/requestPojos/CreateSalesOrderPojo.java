@@ -2,7 +2,7 @@ package requestPojos;
 
 import java.util.List;
 
-public class CreateIssuePojo {
+public class CreateSalesOrderPojo {
     private LocationPojo location;
     private int accuracy;
     private String name;
