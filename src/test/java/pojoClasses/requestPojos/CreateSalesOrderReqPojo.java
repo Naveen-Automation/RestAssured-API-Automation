@@ -1,9 +1,9 @@
-package requestPojos;
+package pojos.requestPojos;
 
 import java.util.List;
 
-public class CreateSalesOrderPojo {
-    private LocationPojo location;
+public class CreateSalesOrderReqPojo {
+    private LocationReqPojo location;
     private int accuracy;
     private String name;
     private String phone_number;
@@ -12,11 +12,11 @@ public class CreateSalesOrderPojo {
     private String website;
     private String language;
 
-    public LocationPojo getLocation() {
+    public LocationReqPojo getLocation() {
         return location;
     }
 
-    public void setLocation(LocationPojo location) {
+    public void setLocation(LocationReqPojo location) {
         this.location = location;
     }
 

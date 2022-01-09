@@ -1,20 +1,21 @@
 package steps;
 
-import Enums.ServiceEndPoints;
+import bsh.EvalError;
+
+import enums.ServiceEndPoints;
 import io.cucumber.java.en.*;
 import io.cucumber.datatable.DataTable;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-import requestPojos.CreateSalesOrderPojo;
-import JavaObjectsToJson.RequestBuilder;
+import pojos.requestPojos.CreateSalesOrderReqPojo;
+import serialization.RequestBuilder;
 
 import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
 import static java.lang.Integer.parseInt;
-import static org.hamcrest.Matchers.equalTo;
+import deSerialization.ResponseBuilder;
 import static org.junit.Assert.*;
 
 public class DXPESteps extends BaseSteps{
@@ -22,7 +23,7 @@ public class DXPESteps extends BaseSteps{
     private ResponseSpecification resSpec;
     private RequestSpecification requestBody;
     private Response response;
-    private CreateSalesOrderPojo requestPojoObject;
+    private CreateSalesOrderReqPojo requestPojoObject;
 
     //To be part of DataTable
     private String expScope;
@@ -42,8 +43,8 @@ public class DXPESteps extends BaseSteps{
     {
         reqSpec = RequestSpecification();
 
-        //Need to use reflection concept to call the API method from the string passed from the Feature file
-        requestPojoObject  = reqbuild.createIssue(iterations, dataTable);
+        //Need to use reflection to call the API method from the string passed from the Feature file
+        requestPojoObject  = reqbuild.CreateSalesOrder(iterations, dataTable);
         requestBody = given().spec(reqSpec).body(requestPojoObject);
     }
 
@@ -80,18 +81,33 @@ public class DXPESteps extends BaseSteps{
     }
 
 
-    @Then("response {string} should match below details {int}")
-    public void response_should_match_below_details(String string, int iterations, DataTable dataTable)
-    {
-        expScope = "APP";
+    @Then("the response {string} of {string} API should match below details {int}")
+    public void response_should_match_below_details(String responseType, String apiName, int iterations, DataTable dataTable) throws EvalError {
+//        expScope = "APP";
         resSpec = ResponseSpecification();
         response.then().spec(resSpec);
 
-        //response.then().spec(resSpec).body("scope", equalTo(expScope));
-        //OR
-        String res=response.asString();
-        JsonPath js=new JsonPath(res);
-        assertEquals(expScope, js.getString("scope"));
+        switch(apiName.toUpperCase()) {
+            case "CREATESALESORDER":
+                ResponseBuilder.ValidateCreateSalesOrderResponse(response, iterations, dataTable);
+                break;
+            case "A":
+
+                break;
+            case "B":
+
+                break;
+            case "":
+
+                break;
+        }
+
+
+//        Interpreter interpreter = new Interpreter();
+//        Object classObject = interpreter.eval( apiName + "ResPojo.class");
+//        Object resPojo = interpreter.eval("Object resPojo = response.as((Type) classObject)");
+//        Object assertObject = interpreter.eval ( "assertEquals(expScope, resPojo.getScope())");
+
     }
 
 }

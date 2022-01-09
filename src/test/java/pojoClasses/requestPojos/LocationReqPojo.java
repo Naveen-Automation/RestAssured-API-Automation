@@ -1,6 +1,6 @@
-package requestPojos;
+package pojos.requestPojos;
 
-public class LocationPojo {
+public class LocationReqPojo {
 
     private int lat;
     private int lng;
