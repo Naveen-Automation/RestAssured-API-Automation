@@ -1,5 +1,6 @@
-package steps;
+package stepsDefinitions;
 
+import hooks.SetUp;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
@@ -30,7 +31,7 @@ public class BaseSteps {
         if (reqSpec == null)
         {
             String baseUri = IniFileManager.GetKeyValue("Jira", "SITBaseURI", System.getProperty("user.dir") + environmentFilePath);
-            PrintStream log = new PrintStream(new FileOutputStream(System.getProperty("user.dir") + "//src//test//resources//Logs//" + "logging.txt"));
+            PrintStream log = new PrintStream(new FileOutputStream(System.getProperty("user.dir") + "//src//test//resources//Logs//" + SetUp.scenario.getName()+ ".txt"));
             expKey = IniFileManager.GetKeyValue("Jira", "accessKey", System.getProperty("user.dir") + environmentFilePath);
             reqSpec = new RequestSpecBuilder()
                     .setContentType(ContentType.JSON).setBaseUri(baseUri).addQueryParam("key", expKey)

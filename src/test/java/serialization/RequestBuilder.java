@@ -1,8 +1,8 @@
-package javaObjectsToJson;
+package serialization;
 
 import io.cucumber.datatable.DataTable;
-import pojos.requestPojos.CreateSalesOrderReqPojo;
-import pojos.requestPojos.LocationReqPojo;
+import pojoClasses.requestPojos.CreateSalesOrderReqPojo;
+import pojoClasses.requestPojos.LocationReqPojo;
 
 import java.io.IOException;
 import java.util.ArrayList;

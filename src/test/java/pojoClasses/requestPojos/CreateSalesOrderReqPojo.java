@@ -1,4 +1,4 @@
-package pojos.requestPojos;
+package pojoClasses.requestPojos;
 
 import java.util.List;
 

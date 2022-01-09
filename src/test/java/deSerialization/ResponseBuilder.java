@@ -1,13 +1,9 @@
-package jsonToJavaObjects;
+package deSerialization;
 
 import io.cucumber.datatable.DataTable;
 import io.restassured.response.Response;
-import pojos.requestPojos.CreateSalesOrderReqPojo;
-import pojos.requestPojos.LocationReqPojo;
-import pojos.responsePojos.CreateSalesOrderResPojo;
+import pojoClasses.responsePojos.CreateSalesOrderResPojo;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

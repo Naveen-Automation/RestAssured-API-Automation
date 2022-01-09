@@ -1,4 +1,4 @@
-package pojos.requestPojos;
+package pojoClasses.requestPojos;
 
 public class LocationReqPojo {
 

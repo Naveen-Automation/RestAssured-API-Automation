@@ -1,9 +1,9 @@
-package Enums;
+package enums;
 
 public enum ServiceEndPoints {
 
     CreateSalesOrder("/maps/api/place/add/json"),
-    CheckOut("/maps/api/place/add/json"),
+    GetSalesOrder("maps/api/place/get/json"),
     Payment("/maps/api/place/add/json");
 
 

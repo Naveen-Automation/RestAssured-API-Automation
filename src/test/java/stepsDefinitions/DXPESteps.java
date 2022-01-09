@@ -1,4 +1,4 @@
-package steps;
+package stepsDefinitions;
 
 import bsh.EvalError;
 
@@ -8,7 +8,7 @@ import io.cucumber.datatable.DataTable;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-import pojos.requestPojos.CreateSalesOrderReqPojo;
+import pojoClasses.requestPojos.CreateSalesOrderReqPojo;
 import serialization.RequestBuilder;
 
 import java.io.IOException;
@@ -107,6 +107,11 @@ public class DXPESteps extends BaseSteps{
 //        Object classObject = interpreter.eval( apiName + "ResPojo.class");
 //        Object resPojo = interpreter.eval("Object resPojo = response.as((Type) classObject)");
 //        Object assertObject = interpreter.eval ( "assertEquals(expScope, resPojo.getScope())");
+
+    }
+
+    @Then("verify that order id is created and should contain all below details when the user calls {string} API with {string} http request {int}")
+    public void verify_that_order_id_is_created_and_should_contain_all_below_details_when_the_user_calls_api_with_http_request(String string, String string2, Integer int1) {
 
     }
 

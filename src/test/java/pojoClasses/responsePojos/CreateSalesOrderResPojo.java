@@ -1,4 +1,4 @@
-package pojos.responsePojos;
+package pojoClasses.responsePojos;
 
 public class CreateSalesOrderResPojo {
 
