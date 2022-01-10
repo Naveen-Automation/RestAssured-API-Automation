@@ -4,7 +4,7 @@ public enum ServiceEndPoints {
 
     CreateSalesOrder("/maps/api/place/add/json"),
     GetSalesOrder("maps/api/place/get/json"),
-    Payment("/maps/api/place/add/json");
+    UpdateSalesOrder("/maps/api/place/update/json");
 
 
     private String endPoint;

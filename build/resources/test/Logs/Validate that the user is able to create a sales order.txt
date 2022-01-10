@@ -27,7 +27,7 @@ Body:
     "language": "English-UK"
 }
 HTTP/1.1 200 OK
-Date: Sun, 09 Jan 2022 19:26:22 GMT
+Date: Sun, 09 Jan 2022 23:35:02 GMT
 Server: Apache/2.4.18 (Ubuntu)
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: POST
@@ -40,11 +40,35 @@ Content-Type: application/json;charset=UTF-8
 
 {
     "status": "OK",
-    "place_id": "ca20393965b1a1e25b331d557d290f7a",
+    "place_id": "911883a0d1ac685a2feacb3e8337c23f",
     "scope": "APP",
-    "reference": "2e2a75d45d3723f522ab1e95925c76f62e2a75d45d3723f522ab1e95925c76f6",
-    "id": "2e2a75d45d3723f522ab1e95925c76f6"
+    "reference": "9cb42b997561cadfabac32c0547e44369cb42b997561cadfabac32c0547e4436",
+    "id": "9cb42b997561cadfabac32c0547e4436"
 }
+Request method:	GET
+Request URI:	https://rahulshettyacademy.com/maps/api/place/get/json?key=qaclick123&911883a0d1ac685a2feacb3e8337c23f
+Proxy:			<none>
+Request params:	<none>
+Query params:	key=qaclick123
+				911883a0d1ac685a2feacb3e8337c23f
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 OK
+Date: Sun, 09 Jan 2022 23:35:03 GMT
+Server: Apache/2.4.18 (Ubuntu)
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: POST
+Access-Control-Max-Age: 3600
+Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With
+Content-Length: 0
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: application/json; charset=UTF-8
 Request method:	POST
 Request URI:	https://rahulshettyacademy.com/maps/api/place/add/json?key=qaclick123
 Proxy:			<none>
@@ -65,7 +89,7 @@ Body:
     "accuracy": 3,
     "name": "Naveens Villah",
     "phone_number": "1234567890",
-    "address": "1 The Queen, Windsor Castle,UK",
+    "address": "2 The Queen, Windsor Castle,UK",
     "types": [
         "Castle",
         "House"
@@ -74,7 +98,7 @@ Body:
     "language": "English-Brit"
 }
 HTTP/1.1 200 OK
-Date: Sun, 09 Jan 2022 19:26:23 GMT
+Date: Sun, 09 Jan 2022 23:35:04 GMT
 Server: Apache/2.4.18 (Ubuntu)
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: POST
@@ -87,8 +111,32 @@ Content-Type: application/json;charset=UTF-8
 
 {
     "status": "OK",
-    "place_id": "96f5682a946547c2ec344fbc5f63995f",
+    "place_id": "2c9bb4273a50895950c0a0e4534eccad",
     "scope": "APP",
-    "reference": "137267ddeef965b31414be59da49e59d137267ddeef965b31414be59da49e59d",
-    "id": "137267ddeef965b31414be59da49e59d"
+    "reference": "af5272bd88c0b16faee5863043bf2efbaf5272bd88c0b16faee5863043bf2efb",
+    "id": "af5272bd88c0b16faee5863043bf2efb"
 }
+Request method:	GET
+Request URI:	https://rahulshettyacademy.com/maps/api/place/get/json?key=qaclick123&2c9bb4273a50895950c0a0e4534eccad
+Proxy:			<none>
+Request params:	<none>
+Query params:	key=qaclick123
+				2c9bb4273a50895950c0a0e4534eccad
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>
+HTTP/1.1 200 OK
+Date: Sun, 09 Jan 2022 23:35:05 GMT
+Server: Apache/2.4.18 (Ubuntu)
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: POST
+Access-Control-Max-Age: 3600
+Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With
+Content-Length: 0
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: application/json; charset=UTF-8

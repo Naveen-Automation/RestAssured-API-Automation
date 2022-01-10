@@ -9,9 +9,13 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import pojoClasses.requestPojos.CreateSalesOrderReqPojo;
+import pojoClasses.requestPojos.UpdateSalesOrderReqPojo;
+import pojoClasses.responsePojos.CreateSalesOrderResPojo;
 import serialization.RequestBuilder;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static java.lang.Integer.parseInt;
@@ -23,14 +27,15 @@ public class DXPESteps extends BaseSteps{
     private ResponseSpecification resSpec;
     private RequestSpecification requestBody;
     private Response response;
-    private CreateSalesOrderReqPojo requestPojoObject;
-
+    private CreateSalesOrderReqPojo reqPojoObjCreateSalesOrder;
+    private CreateSalesOrderResPojo resPojoObjCreateSalesOrder;
+    private UpdateSalesOrderReqPojo reqPojoObjUpdateSalesOrder;
     //To be part of DataTable
     private String expScope;
 
     private String resource;
 
-    private RequestBuilder reqbuild = new RequestBuilder();
+    private RequestBuilder requestBuilder = new RequestBuilder();
 
     @Given("the user authenticates using {string}")
     public void the_user_authenticates_using(String string)
@@ -38,14 +43,21 @@ public class DXPESteps extends BaseSteps{
     }
 
 
-    @Given("the user creates a json body for the http {string} request using below details {int}")
-    public void the_user_creates_a_http_request_body_using_below_details( String requestType, int iterations, DataTable dataTable) throws IOException
+    @Given("the user creates a json body for {string} API with {string} http request using below details {int}")
+    public void the_user_creates_a_http_request_body_using_below_details( String apiName, String httpMethod, int iterations, DataTable dataTable) throws IOException
     {
-        reqSpec = RequestSpecification();
+        reqSpec = RequestSpecification(httpMethod);
 
-        //Need to use reflection to call the API method from the string passed from the Feature file
-        requestPojoObject  = reqbuild.CreateSalesOrder(iterations, dataTable);
-        requestBody = given().spec(reqSpec).body(requestPojoObject);
+        switch(apiName.toUpperCase()) {
+            case "CREATESALESORDER":
+                reqPojoObjCreateSalesOrder = requestBuilder.CreateSalesOrder(iterations, dataTable);
+                requestBody = given().spec(reqSpec).body(reqPojoObjCreateSalesOrder);
+                break;
+            case "UPDATESALESORDER":
+                reqPojoObjUpdateSalesOrder = requestBuilder.UpdateSalesOrder(iterations, resPojoObjCreateSalesOrder.getPlace_id(), dataTable);
+                requestBody = given().spec(reqSpec).body(reqPojoObjUpdateSalesOrder);
+                break;
+        }
     }
 
 
@@ -81,27 +93,26 @@ public class DXPESteps extends BaseSteps{
     }
 
 
-    @Then("the response {string} of {string} API should match below details {int}")
-    public void response_should_match_below_details(String responseType, String apiName, int iterations, DataTable dataTable) throws EvalError {
-//        expScope = "APP";
+    @Then("the response json of {string} API should match below details {int}")
+    public void response_should_match_below_details(String apiName, int iterations, DataTable dataTable) throws EvalError {
         resSpec = ResponseSpecification();
         response.then().spec(resSpec);
 
+        List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
+
         switch(apiName.toUpperCase()) {
             case "CREATESALESORDER":
-                ResponseBuilder.ValidateCreateSalesOrderResponse(response, iterations, dataTable);
+                resPojoObjCreateSalesOrder = ResponseBuilder.CreateSalesOrderResponse(response);
+                assertEquals(table.get(iterations).get("ResBdy_ExpScope"), resPojoObjCreateSalesOrder.getScope());
+                assertEquals(table.get(iterations).get("ResBdy_ExpStatus"), resPojoObjCreateSalesOrder.getStatus());
                 break;
-            case "A":
+            case "GETSALESORDER":
+                assertEquals(table.get(iterations).get("ReqBdy_Name"), reqPojoObjCreateSalesOrder.getName());
+                assertEquals(table.get(iterations).get("ReqBdy_Address"), reqPojoObjCreateSalesOrder.getAddress());
+                assertEquals(table.get(iterations).get("ReqBdy_PhoneNumber"), reqPojoObjCreateSalesOrder.getPhone_number());
+                break;
 
-                break;
-            case "B":
-
-                break;
-            case "":
-
-                break;
         }
-
 
 //        Interpreter interpreter = new Interpreter();
 //        Object classObject = interpreter.eval( apiName + "ResPojo.class");
@@ -110,9 +121,15 @@ public class DXPESteps extends BaseSteps{
 
     }
 
-    @Then("verify that order id is created and should contain all below details when the user calls {string} API with {string} http request {int}")
-    public void verify_that_order_id_is_created_and_should_contain_all_below_details_when_the_user_calls_api_with_http_request(String string, String string2, Integer int1) {
+    @Given("the user creates the http {string} request")
+    public void GetRequest_Without_Query_Parameters(String string) {
+        requestBody = given().spec(reqSpec).queryParam(resPojoObjCreateSalesOrder.getPlace_id());
+    }
 
+
+    @Given("the user creates the http {string}} request using below details")
+    public void GetRequest_With_Query_Parameters(String string) {
+        requestBody = given().spec(reqSpec);
     }
 
 }

@@ -3,6 +3,8 @@ package serialization;
 import io.cucumber.datatable.DataTable;
 import pojoClasses.requestPojos.CreateSalesOrderReqPojo;
 import pojoClasses.requestPojos.LocationReqPojo;
+import pojoClasses.requestPojos.UpdateSalesOrderReqPojo;
+import stepsDefinitions.DXPESteps;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,11 +22,10 @@ public class RequestBuilder {
       String expScope;
       String expServer;
 
-      List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
-
       CreateSalesOrderReqPojo ci = new CreateSalesOrderReqPojo();
       LocationReqPojo lctn = new LocationReqPojo();
 
+      List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
       String[] arr  = table.get(iterations).get("ReqBdy_Types").split("#,#");
       List<String> typ = new ArrayList<String>();
       typ.add(arr[0]);
@@ -43,6 +44,20 @@ public class RequestBuilder {
       ci.setLanguage(table.get(iterations).get("ReqBdy_Language"));
 
       return ci;
+   }
+
+
+   public UpdateSalesOrderReqPojo UpdateSalesOrder(int iterations, String place_id , DataTable dataTable) throws IOException {
+
+      UpdateSalesOrderReqPojo pojoObject = new UpdateSalesOrderReqPojo();
+
+      List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
+
+      pojoObject.setPlace_id(table.get(iterations).get(place_id));
+      pojoObject.setKey(table.get(iterations).get("qaclick123"));
+      pojoObject.setAddress(table.get(iterations).get("ReqBdy_Address"));
+
+      return pojoObject;
 
    }
 }

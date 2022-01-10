@@ -4,19 +4,26 @@ Feature: Sales Order Journey
   Scenario Outline: Validate that the user is able to create a sales order
 
     Given the user authenticates using ".json"
-    And the user creates a json body for the http "post" request using below details <Iterations>
+    And the user creates a json body for "CreateSalesOrder" API with "Post" http request using below details <Iterations>
       | ReqHdr_ | ReqQpm_ | ReqPpm_ | ReqBdy_Lat | ReqBdy_Lng | ReqBdy_Accuracy | ReqBdy_Name      | ReqBdy_PhoneNumber | ReqBdy_Address                 | ReqBdy_Types   | ReqBdy_Website    | ReqBdy_Language |
       | N/A     | N/A     | N/A     | 38         | 40         | 50              | Veerankis Villah | 9911588999         | 1 The Queen, Windsor Castle,UK | Castle#,#House | http://google.com | English-UK      |
-      | N/A     | N/A     | N/A     | 1          | 3          | 3               | Naveens Villah   | 1234567890         | 1 The Queen, Windsor Castle,UK | Castle#,#House | http://google.com | English-Brit    |
+      | N/A     | N/A     | N/A     | 1          | 3          | 3               | Naveens Villah   | 1234567890         | 2 The Queen, Windsor Castle,UK | Castle#,#House | http://google.com | English-Brit    |
 
     When the user calls "CreateSalesOrder" API with "Post" http request
 
     Then the user should get the status code as 200
-    And the response "Json" of "CreateSalesOrder" API should match below details <Iterations>
+    And the response json of "CreateSalesOrder" API should match below details <Iterations>
       | ResHdr_Address | ResHdr_Id              | ResBdy_ExpScope | ResBdy_ExpStatus |
       | N/A            | Apache/2.4.18 (Ubuntu) | APP             | OK               |
       | N/A            | Apache/2.4.18 (Ubuntu) | APP             | OK               |
-    And verify that order id is created and should contain all below details when the user calls "CheckOut" API with "Post" http request <Iterations>
+
+    Given the user creates the http "Get" request
+    When the user calls "GetSalesOrder" API with "Get" http request
+    Then the user should get the status code as 200
+    And the response json of "GetSalesOrder" API should match below details <Iterations>
+      | ReqBdy_Name      | ReqBdy_PhoneNumber | ReqBdy_Address                 |
+      | Veerankis Villah | 9911588999         | 1 The Queen, Windsor Castle,UK |
+      | Naveens Villah   | 1234567890         | 2 The Queen, Windsor Castle,UK |
 
     Examples:
       | Iterations |
