@@ -17,3 +17,13 @@
         //response.then().spec(resSpec).body("scope", equalTo(expScope));
 
     }
+
+
+
+
+
+
+//        Interpreter interpreter = new Interpreter();
+//        Object classObject = interpreter.eval( apiName + "ResPojo.class");
+//        Object resPojo = interpreter.eval("Object resPojo = response.as((Type) classObject)");
+//        Object assertObject = interpreter.eval ( "assertEquals(expScope, resPojo.getScope())");
