@@ -3,7 +3,7 @@ package runners;
 import io.cucumber.junit.CucumberOptions;
 
 @CucumberOptions(
-//      plugin = {"io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm","json:RunReports/cucumberJson/cucumber-report.json"},
+      plugin = {"io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm","json:RunReports/cucumberJson/cucumber-report.json"},
         features = {"src/test/java/featureFiles"},
         glue = {"stepsDefinitions", "hooks"}
         )
@@ -11,7 +11,7 @@ import io.cucumber.junit.CucumberOptions;
 public class BaseRunner{}
 
 
-
+//"io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm",
 
 
 
