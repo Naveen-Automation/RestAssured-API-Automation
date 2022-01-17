@@ -3,6 +3,7 @@ package stepsDefinitions;
 import bsh.EvalError;
 import static org.junit.Assert.*;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import io.cucumber.java.en.*;
@@ -18,6 +19,7 @@ import pojoClasses.requestPojos.UpdateSalesOrderReqPojo;
 import pojoClasses.responsePojos.CreateSalesOrderResPojo;
 import serialization.RequestBuilder;
 import deSerialization.ResponseBuilder;
+import utilities.Utils;
 
 
 public class DXPESteps extends BaseSteps{
@@ -30,6 +32,8 @@ public class DXPESteps extends BaseSteps{
     private UpdateSalesOrderReqPojo reqPojoObjUpdateSalesOrder;
 
     private RequestBuilder requestBuilder = new RequestBuilder();
+    private String reqPathParameters;
+    private String reqHeaders;
 
     @Given("the user authenticates using {string}")
     public void the_user_authenticates_using(String string)
@@ -38,20 +42,17 @@ public class DXPESteps extends BaseSteps{
 
 
     @Given("the user creates a json request body for {string} API with {string} http method using below details {int}")
-    public void Creates_Post_Put_Delete_Request_Body( String apiName, String httpMethod, int iterations, DataTable dataTable) throws IOException
+    public void Creates_Post_Put_Delete_Request_Body( String apiName, String httpMethod, int iterations, DataTable dataTable) throws Exception
     {
         reqSpec = RequestSpecification(httpMethod);
+        List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
+        reqPathParameters = table.get(iterations).get("ReqPpm");
+        reqHeaders = table.get(iterations).get("ReqHdr");
 
-        switch(apiName.toUpperCase()) {
-            case "CREATESALESORDER":
-                reqPojoObjCreateSalesOrder = requestBuilder.CreateSalesOrder(iterations, dataTable);
-                requestBody = given().spec(reqSpec).body(reqPojoObjCreateSalesOrder);
-                break;
-            case "UPDATESALESORDER":
-                reqPojoObjUpdateSalesOrder = requestBuilder.UpdateSalesOrder(iterations, resPojoObjCreateSalesOrder.getPlace_id(), dataTable);
-                requestBody = given().spec(reqSpec).body(reqPojoObjUpdateSalesOrder);
-                break;
-        }
+        Object[] methodArguments = new Object[]{iterations,dataTable};
+        Utils.ExecuteMethodWhenMethodNamePassedAsString (requestBuilder, apiName, methodArguments);
+        Field field = Utils.GetClassFieldTypeOnPassingFieldName(requestBuilder,apiName + "ReqPojoObject");
+        requestBody = given().spec(reqSpec).body(field.get(requestBuilder));
     }
 
 
@@ -61,19 +62,23 @@ public class DXPESteps extends BaseSteps{
         //Getting the endpoint from the enum
         ServiceEndPoints serviceEndPoint = ServiceEndPoints.valueOf(apiName);
         serviceEndPoint.getEndPoint();
+        if(reqPathParameters == null || reqPathParameters.equalsIgnoreCase("N/A") || reqPathParameters.equalsIgnoreCase("NA"))
+        {
+            reqPathParameters = "";
+        }
 
         switch(httpMethod.toUpperCase()) {
             case "POST":
-                response = requestBody.when().post(serviceEndPoint.getEndPoint());
+                response = requestBody.when().post(serviceEndPoint.getEndPoint() + reqPathParameters);
                 break;
             case "PUT":
-                response = requestBody.when().put(serviceEndPoint.getEndPoint());
+                response = requestBody.when().put(serviceEndPoint.getEndPoint()+ reqPathParameters);
                 break;
             case "GET":
-                response = requestBody.when().get(serviceEndPoint.getEndPoint());
+                response = requestBody.when().get(serviceEndPoint.getEndPoint()+ reqPathParameters);
                 break;
             case "DELETE":
-                response = requestBody.when().delete(serviceEndPoint.getEndPoint());
+                response = requestBody.when().delete(serviceEndPoint.getEndPoint()+ reqPathParameters);
                 break;
         }
     }
@@ -84,6 +89,16 @@ public class DXPESteps extends BaseSteps{
     {
         int actResponseCode = response.getStatusCode();
         assertEquals(expstatusCode, actResponseCode);
+    }
+
+    @Then("the elapsed response time should be less than threshold")
+    public void ValidateResponseTimeIsUnderThreshold()
+    {
+        long actResponseTime = response.getTime();
+        if(actResponseTime < 6000L)
+        {
+            assertTrue("Response Time is under threshold " + actResponseTime, true);
+        }
     }
 
 

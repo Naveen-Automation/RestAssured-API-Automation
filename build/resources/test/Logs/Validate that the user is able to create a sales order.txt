@@ -27,7 +27,7 @@ Body:
     "language": "English-UK"
 }
 HTTP/1.1 200 OK
-Date: Thu, 13 Jan 2022 07:34:21 GMT
+Date: Mon, 17 Jan 2022 21:55:44 GMT
 Server: Apache/2.4.18 (Ubuntu)
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: POST
@@ -40,35 +40,11 @@ Content-Type: application/json;charset=UTF-8
 
 {
     "status": "OK",
-    "place_id": "3d4c64f6ce7c3defde9a178699c4e571",
+    "place_id": "1483e4d39db3fb55a2dfd1451c69270d",
     "scope": "APP",
-    "reference": "0111d4d2cc81ce65a3b5d1764698c9320111d4d2cc81ce65a3b5d1764698c932",
-    "id": "0111d4d2cc81ce65a3b5d1764698c932"
+    "reference": "25b18dc307a042fea684c0b3a46fcd2c25b18dc307a042fea684c0b3a46fcd2c",
+    "id": "25b18dc307a042fea684c0b3a46fcd2c"
 }
-Request method:	GET
-Request URI:	https://rahulshettyacademy.com/maps/api/place/get/json?key=qaclick123&3d4c64f6ce7c3defde9a178699c4e571
-Proxy:			<none>
-Request params:	<none>
-Query params:	key=qaclick123
-				3d4c64f6ce7c3defde9a178699c4e571
-Form params:	<none>
-Path params:	<none>
-Headers:		Accept=*/*
-				Content-Type=application/json
-Cookies:		<none>
-Multiparts:		<none>
-Body:			<none>
-HTTP/1.1 200 OK
-Date: Thu, 13 Jan 2022 07:34:22 GMT
-Server: Apache/2.4.18 (Ubuntu)
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Methods: POST
-Access-Control-Max-Age: 3600
-Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With
-Content-Length: 0
-Keep-Alive: timeout=5, max=100
-Connection: Keep-Alive
-Content-Type: application/json; charset=UTF-8
 Request method:	POST
 Request URI:	https://rahulshettyacademy.com/maps/api/place/add/json?key=qaclick123
 Proxy:			<none>
@@ -98,7 +74,7 @@ Body:
     "language": "English-Brit"
 }
 HTTP/1.1 200 OK
-Date: Thu, 13 Jan 2022 07:34:23 GMT
+Date: Mon, 17 Jan 2022 21:55:45 GMT
 Server: Apache/2.4.18 (Ubuntu)
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: POST
@@ -111,32 +87,8 @@ Content-Type: application/json;charset=UTF-8
 
 {
     "status": "OK",
-    "place_id": "fbbbc585d9a1ddf646fa726186109301",
+    "place_id": "f3037f58d29fa1f6394908ff85911fe6",
     "scope": "APP",
-    "reference": "0d3dbfae209f6dd34442a81f349ae91a0d3dbfae209f6dd34442a81f349ae91a",
-    "id": "0d3dbfae209f6dd34442a81f349ae91a"
+    "reference": "8fe3773fc2cd44e0ee55519a4df4f5bb8fe3773fc2cd44e0ee55519a4df4f5bb",
+    "id": "8fe3773fc2cd44e0ee55519a4df4f5bb"
 }
-Request method:	GET
-Request URI:	https://rahulshettyacademy.com/maps/api/place/get/json?key=qaclick123&fbbbc585d9a1ddf646fa726186109301
-Proxy:			<none>
-Request params:	<none>
-Query params:	key=qaclick123
-				fbbbc585d9a1ddf646fa726186109301
-Form params:	<none>
-Path params:	<none>
-Headers:		Accept=*/*
-				Content-Type=application/json
-Cookies:		<none>
-Multiparts:		<none>
-Body:			<none>
-HTTP/1.1 200 OK
-Date: Thu, 13 Jan 2022 07:34:24 GMT
-Server: Apache/2.4.18 (Ubuntu)
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Methods: POST
-Access-Control-Max-Age: 3600
-Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With
-Content-Length: 0
-Keep-Alive: timeout=5, max=100
-Connection: Keep-Alive
-Content-Type: application/json; charset=UTF-8
