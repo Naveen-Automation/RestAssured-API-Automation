@@ -3,8 +3,7 @@ Feature: Sales Order Journey
   @sanity
   Scenario Outline: Validate that the user is able to create a sales order
 
-    Given the user authenticates using ".json"
-    And the user creates a json request body for "CreateSalesOrder" API with "Post" http method using below details <Iterations>
+    Given the user creates a json request body for "CreateSalesOrder" API with "Post" http method using below details <Iterations>
       | ReqHdr | ReqQpm | ReqPpm | ReqBdy_Lat | ReqBdy_Lng | ReqBdy_Accuracy | ReqBdy_Name      | ReqBdy_PhoneNumber | ReqBdy_Address                 | ReqBdy_Types   | ReqBdy_Website    | ReqBdy_Language |
       | N/A    | N/A    | N/A    | 38         | 40         | 50              | Veerankis Villah | 9911588999         | 1 The Queen, Windsor Castle,UK | Castle#,#House | http://google.com | English-UK      |
       | N/A    | N/A    | N/A    | 1          | 3          | 3               | Naveens Villah   | 1234567890         | 2 The Queen, Windsor Castle,UK | Castle#,#House | http://google.com | English-Brit    |

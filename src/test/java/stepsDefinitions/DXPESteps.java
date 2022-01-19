@@ -32,22 +32,26 @@ public class DXPESteps extends BaseSteps{
     private UpdateSalesOrderReqPojo reqPojoObjUpdateSalesOrder;
 
     private RequestBuilder requestBuilder = new RequestBuilder();
+    private ResponseBuilder responseBuilder = new ResponseBuilder();
     private String reqPathParameters;
     private String reqHeaders;
-
-    @Given("the user authenticates using {string}")
-    public void the_user_authenticates_using(String string)
-    {
-    }
-
 
     @Given("the user creates a json request body for {string} API with {string} http method using below details {int}")
     public void Creates_Post_Put_Delete_Request_Body( String apiName, String httpMethod, int iterations, DataTable dataTable) throws Exception
     {
-        reqSpec = RequestSpecification(httpMethod);
+
         List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
         reqPathParameters = table.get(iterations).get("ReqPpm");
         reqHeaders = table.get(iterations).get("ReqHdr");
+
+        if(reqHeaders == null || reqHeaders.equalsIgnoreCase("N/A") || reqHeaders.equalsIgnoreCase("NA"))
+        {
+            reqSpec = RequestSpecification(httpMethod);
+        }
+        else if (reqHeaders.equalsIgnoreCase(""))
+        {
+//            reqSpec = AccessKeyRequestSpecification(httpMethod);
+        }
 
         Object[] methodArguments = new Object[]{iterations,dataTable};
         Utils.ExecuteMethodWhenMethodNamePassedAsString (requestBuilder, apiName, methodArguments);
@@ -103,27 +107,11 @@ public class DXPESteps extends BaseSteps{
 
 
     @Then("the response json of {string} API should match below details {int}")
-    public void Validate_Response_Body_With_Expected_Values(String apiName, int iterations, DataTable dataTable) throws EvalError {
+    public void Validate_Response_Body_With_Expected_Values(String apiName, int iterations, DataTable dataTable) throws Exception {
         resSpec = ResponseSpecification();
         response.then().spec(resSpec);
-
-        List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
-
-        switch(apiName.toUpperCase()) {
-            case "CREATESALESORDER":
-                resPojoObjCreateSalesOrder = ResponseBuilder.CreateSalesOrderResponse(response);
-
-                //All assertions to be moved to new class files.
-                assertEquals(table.get(iterations).get("ResBdy_ExpScope"), resPojoObjCreateSalesOrder.getScope());
-                assertEquals(table.get(iterations).get("ResBdy_ExpStatus"), resPojoObjCreateSalesOrder.getStatus());
-                break;
-            case "GETSALESORDER":
-                //All assertions to be moved to new class files.
-                assertEquals(table.get(iterations).get("ReqBdy_Name"), reqPojoObjCreateSalesOrder.getName());
-                assertEquals(table.get(iterations).get("ReqBdy_Address"), reqPojoObjCreateSalesOrder.getAddress());
-                assertEquals(table.get(iterations).get("ReqBdy_PhoneNumber"), reqPojoObjCreateSalesOrder.getPhone_number());
-                break;
-        }
+        Object[] methodArguments = new Object[]{response, iterations, dataTable};
+        Utils.ExecuteMethodWhenMethodNamePassedAsString (responseBuilder, apiName, methodArguments);
     }
 
     @Given("the user creates the http {string} request")
