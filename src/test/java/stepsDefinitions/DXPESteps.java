@@ -1,5 +1,6 @@
 package stepsDefinitions;
 
+import assertions.Validations;
 import bsh.EvalError;
 import static org.junit.Assert.*;
 import java.io.IOException;
@@ -33,6 +34,7 @@ public class DXPESteps extends BaseSteps{
 
     private RequestBuilder requestBuilder = new RequestBuilder();
     private ResponseBuilder responseBuilder = new ResponseBuilder();
+    private Validations validations = new Validations();
     private String reqPathParameters;
     private String reqHeaders;
 
@@ -54,8 +56,8 @@ public class DXPESteps extends BaseSteps{
         }
 
         Object[] methodArguments = new Object[]{iterations,dataTable};
-        Utils.ExecuteMethodWhenMethodNamePassedAsString (requestBuilder, apiName, methodArguments);
-        Field field = Utils.GetClassFieldTypeOnPassingFieldName(requestBuilder,apiName + "ReqPojoObject");
+        Utils.ExecuteMethodWhenMethodNamePassedAsString (requestBuilder, apiName + "_RequestBuilder", methodArguments);
+        Field field = Utils.GetClassFieldTypeOnPassingFieldName(requestBuilder,apiName + "_ReqPojoObj");
         requestBody = given().spec(reqSpec).body(field.get(requestBuilder));
     }
 
@@ -110,8 +112,22 @@ public class DXPESteps extends BaseSteps{
     public void Validate_Response_Body_With_Expected_Values(String apiName, int iterations, DataTable dataTable) throws Exception {
         resSpec = ResponseSpecification();
         response.then().spec(resSpec);
-        Object[] methodArguments = new Object[]{response, iterations, dataTable};
-        Utils.ExecuteMethodWhenMethodNamePassedAsString (responseBuilder, apiName, methodArguments);
+
+//      ArrayList of the Arguments of the 'Method' to be executed as a part of 'ExecuteMethodWhenMethodNamePassedAsString' method
+        Object[] methodArgument = new Object[]{response};
+
+//      Calling a method dynamically at run time via method name which is passed as a string value
+        Utils.ExecuteMethodWhenMethodNamePassedAsString (responseBuilder, apiName + "_ResponseBuilder", methodArgument);
+
+//      Accessing class fields dynamically using reflection by passing the field name as a string to the 'GetClassFieldTypeOnPassingFieldName' method
+        Field field = Utils.GetClassFieldTypeOnPassingFieldName(responseBuilder,apiName + "_ResPojoObj");
+
+//      Calling a method dynamically at run time via method name which is passed as a string value
+        Object[] methodArguments = new Object[]{field.get(responseBuilder), iterations, dataTable};
+
+//      Calling a method dynamically at run time via method name which is passed as a string value
+        Utils.ExecuteMethodWhenMethodNamePassedAsString (validations, apiName + "_Validations", methodArguments);
+
     }
 
     @Given("the user creates the http {string} request")
