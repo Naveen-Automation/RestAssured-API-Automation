@@ -20,7 +20,8 @@ import pojoClasses.requestPojos.UpdateSalesOrderReqPojo;
 import pojoClasses.responsePojos.CreateSalesOrderResPojo;
 import serialization.RequestBuilder;
 import deSerialization.ResponseBuilder;
-import utilities.Utils;
+import utilities.IniFileManager;
+import utilities.Util;
 
 
 public class DXPESteps extends BaseSteps{
@@ -41,6 +42,7 @@ public class DXPESteps extends BaseSteps{
     @Given("the user creates a json request body for {string} API with {string} http method using below details {int}")
     public void Creates_Post_Put_Delete_Request_Body( String apiName, String httpMethod, int iterations, DataTable dataTable) throws Exception
     {
+        String fieldName;
 
         List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
         reqPathParameters = table.get(iterations).get("ReqPpm");
@@ -56,8 +58,13 @@ public class DXPESteps extends BaseSteps{
         }
 
         Object[] methodArguments = new Object[]{iterations,dataTable};
-        Utils.ExecuteMethodWhenMethodNamePassedAsString (requestBuilder, apiName + "_RequestBuilder", methodArguments);
-        Field field = Utils.GetClassFieldTypeOnPassingFieldName(requestBuilder,apiName + "_ReqPojoObj");
+        Util.ExecuteMethodWhenMethodNamePassedAsString (requestBuilder, apiName + "_RequestBuilder", methodArguments);
+
+        fieldName = Util.ReplaceFirstUpperCaseCharacterOfTheStringWithLowerCaseOfSameCharacter(apiName) + "_ReqPojoObj";
+
+//      Accessing class fields dynamically using reflection by passing the field name as a string to the 'GetClassFieldTypeOnPassingFieldName' method
+        Field field = Util.GetClassFieldTypeOnPassingFieldName(requestBuilder, fieldName);
+
         requestBody = given().spec(reqSpec).body(field.get(requestBuilder));
     }
 
@@ -98,10 +105,10 @@ public class DXPESteps extends BaseSteps{
     }
 
     @Then("the elapsed response time should be less than threshold")
-    public void ValidateResponseTimeIsUnderThreshold()
-    {
+    public void ValidateResponseTimeIsUnderThreshold() throws IOException {
         long actResponseTime = response.getTime();
-        if(actResponseTime < 6000L)
+        long thresholdResponseTime =  Long.parseLong(IniFileManager.GetKeyValue("Jira", "ThresholdResponseTime", System.getProperty("user.dir") + environmentFilePath));
+        if(actResponseTime < thresholdResponseTime)
         {
             assertTrue("Response Time is under threshold " + actResponseTime, true);
         }
@@ -110,6 +117,7 @@ public class DXPESteps extends BaseSteps{
 
     @Then("the response json of {string} API should match below details {int}")
     public void Validate_Response_Body_With_Expected_Values(String apiName, int iterations, DataTable dataTable) throws Exception {
+        String fieldName;
         resSpec = ResponseSpecification();
         response.then().spec(resSpec);
 
@@ -117,16 +125,17 @@ public class DXPESteps extends BaseSteps{
         Object[] methodArgument = new Object[]{response};
 
 //      Calling a method dynamically at run time via method name which is passed as a string value
-        Utils.ExecuteMethodWhenMethodNamePassedAsString (responseBuilder, apiName + "_ResponseBuilder", methodArgument);
+        Util.ExecuteMethodWhenMethodNamePassedAsString (responseBuilder, apiName + "_ResponseBuilder", methodArgument);
 
+        fieldName = Util.ReplaceFirstUpperCaseCharacterOfTheStringWithLowerCaseOfSameCharacter(apiName) + "_ResPojoObj";
 //      Accessing class fields dynamically using reflection by passing the field name as a string to the 'GetClassFieldTypeOnPassingFieldName' method
-        Field field = Utils.GetClassFieldTypeOnPassingFieldName(responseBuilder,apiName + "_ResPojoObj");
+        Field field = Util.GetClassFieldTypeOnPassingFieldName(responseBuilder, fieldName);
 
 //      Calling a method dynamically at run time via method name which is passed as a string value
         Object[] methodArguments = new Object[]{field.get(responseBuilder), iterations, dataTable};
 
 //      Calling a method dynamically at run time via method name which is passed as a string value
-        Utils.ExecuteMethodWhenMethodNamePassedAsString (validations, apiName + "_Validations", methodArguments);
+        Util.ExecuteMethodWhenMethodNamePassedAsString (validations, apiName + "_Validations", methodArguments);
 
     }
 

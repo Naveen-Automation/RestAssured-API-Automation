@@ -16,4 +16,6 @@ public class Validations {
         assertEquals(table.get(iterations).get("ResBdy_ExpScope"), resPojoObj.getScope());
         assertEquals(table.get(iterations).get("ResBdy_ExpStatus"), resPojoObj.getStatus());
     }
+
+
 }
