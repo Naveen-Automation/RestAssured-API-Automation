@@ -9,6 +9,7 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import utilities.IniFileManager;
+import utilities.Util;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class BaseSteps {
     public String expServer;
     public String expKey;
 
-    public String environmentFilePath = "//src//test/resources//config//environment.ini" ;
+    public static String environmentFilePath = "//src//test/resources//config//environment.ini" ;
     public  String resourcesFilePath= "//src//test/resources//globalVariables//resourcePath.ini";
 
     public static RequestSpecification reqSpec; // Static allows to retain the value of reqSpec till the execution is live
@@ -65,8 +66,9 @@ public class BaseSteps {
 
         if (reqSpec == null)
         {
+            Util.CreateLogsFolderIfNotPresent();
             String baseUri = IniFileManager.GetKeyValue("Jira", "SITBaseURI", System.getProperty("user.dir") + environmentFilePath);
-            PrintStream log = new PrintStream(new FileOutputStream(System.getProperty("user.dir") + "//src//test//resources//Logs//" + SetUp.scenario.getName()+ ".txt"));
+            PrintStream log = new PrintStream(new FileOutputStream(System.getProperty("user.dir") + "//src//test//resources//Logs//" + Util.logsFolderName + "//" + SetUp.scenario.getName() + "_" + Util.TimeStamp("yyyy-MM-dd HH:mm:ss") + ".txt"));
             expKey = IniFileManager.GetKeyValue("Jira", "accessKey", System.getProperty("user.dir") + environmentFilePath);
             reqSpec = new RequestSpecBuilder()
                     .setContentType(ContentType.JSON).setBaseUri(baseUri).addQueryParam("key", expKey)
