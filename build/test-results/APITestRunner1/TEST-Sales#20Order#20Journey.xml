@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Sales Order Journey" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-01-23T02:16:15" hostname="CPX-ZH0YG4M2ADL" time="5.064">
+  <properties/>
+  <testcase name="Validate that the user is able to create a sales order #1" classname="Sales Order Journey" time="3.938"/>
+  <testcase name="Validate that the user is able to create a sales order #2" classname="Sales Order Journey" time="1.126"/>
+  <system-out><![CDATA[https://rahulshettyacademy.com
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
