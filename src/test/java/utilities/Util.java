@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Util {
     public static String logsFolderName;
@@ -73,6 +77,36 @@ public class Util {
             logsFolderPath = projectFolderPath + logsFolderRelativePath + logsFolderName;
         }
         return logsFolderPath;
+    }
+
+
+
+
+    public static List<Map<String,String>> MakeAListOfHashMapFromTwoArrayLists(List<String> header, List<List<String>> valueList)
+    {
+        Map<String,String> hashMap = new HashMap<>();
+        List<Map<String, String>> listOfMaps = new ArrayList<Map<String,String>>();
+        for(int i=0; i< valueList.size(); i++)
+        {
+            for(int j=0; j<valueList.size(); j++)
+            {
+                hashMap.put(header.get(j), valueList.get(i).get(j));
+            }
+            listOfMaps.add(hashMap);
+        }
+        return listOfMaps;
+    }
+
+
+
+    public static Map<String,String> MakeAHashMapFromTwoArrayLists(List<String> header, List<String> valueList)
+    {
+        Map<String,String> hashMap = new HashMap<>();
+            for(int j=0; j<header.size(); j++)
+            {
+                hashMap.put(header.get(j), valueList.get(j));
+            }
+        return hashMap;
     }
 
 }

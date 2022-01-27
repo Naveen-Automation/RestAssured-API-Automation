@@ -27,7 +27,7 @@ public class BaseSteps {
     public static ResponseSpecification resSpec;
 
 
-    public RequestSpecification RequestSpecification(String httpMethod) throws IOException {
+    public RequestSpecification RequestSpecification() throws IOException {
 
 //            if (httpMethod.equalsIgnoreCase("GET"))
 //            {

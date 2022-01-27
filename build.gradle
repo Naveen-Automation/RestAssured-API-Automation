@@ -1,24 +1,35 @@
+//https://www.petrikainulainen.net/programming/testing/junit-5-tutorial-running-unit-tests-with-gradle/
+
 plugins {
+    //create a Java project by applying the Java plugin
     id 'java'
+
+//    A Gradle plugin for running Cucumber-JVM
     id "se.thinkcode.cucumber-runner" version "0.0.8"
 }
 
 group 'org.example'
 version '1.0-SNAPSHOT'
 
+
+//Below block of code ensure that Gradle uses the Maven central repository when it resolves the dependencies of our Gradle build
 repositories {
     mavenCentral()
 }
+
+
 //allure {
 //    value = '2.15.0'
 //    autoconfigure = false
 //}
+
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.2.3'
     testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: '7.2.3'
+    implementation group: 'io.qameta.allure', name: 'allure-cucumber7-jvm', version: '2.17.2'
     testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.4.0'
     testImplementation group: 'org.testng', name: 'testng', version: '7.4.0'
     testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
@@ -27,13 +38,11 @@ dependencies {
     implementation group: 'com.googlecode.json-simple',  name: 'json-simple',   version: '1.1.1'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.1'
     implementation group: 'org.beanshell', name: 'bsh', version: '2.0b5'
-
-    implementation group: 'io.qameta.allure', name: 'allure-cucumber7-jvm', version: '2.17.2'
 }
 
 
-//Even though Gradle (version 4.6 or newer) has a native support for JUnit 5, this support isn't enabled by default. If we want to enable it, we have to ensure that the test task uses JUnit 5 instead of JUnit 4.
-//After we have enabled the Gradle's native JUnit 5 support, the source code of our build.gradle file looks as follows:
+//Even though Gradle (version 4.6 or newer) has a native support for JUnit 5, this support isn't enabled by default. If you want to enable it, you have to ensure that the test task uses JUnit 5 instead of JUnit 4.
+//After you have enabled the Gradle's native JUnit 5 support, the source code of your build.gradle file looks as follows:
 test {
     useJUnitPlatform ()
 }

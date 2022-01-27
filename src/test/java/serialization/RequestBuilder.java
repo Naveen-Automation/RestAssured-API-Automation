@@ -17,7 +17,7 @@ public class RequestBuilder {
    public CreateSalesOrderReqPojo createSalesOrder_ReqPojoObj;
    public UpdateSalesOrderReqPojo updateSalesOrder_ReqPojoObj;
 
-   public CreateSalesOrderReqPojo CreateSalesOrder_RequestBuilder(int iterations, DataTable dataTable) throws IOException {
+   public CreateSalesOrderReqPojo CreateSalesOrder_RequestBuilder(int iterations, List<Map<String,String>> table) throws IOException {
 
       String resource;
       int statusCode;
@@ -27,7 +27,6 @@ public class RequestBuilder {
       createSalesOrder_ReqPojoObj = new CreateSalesOrderReqPojo();
       LocationReqPojo lctn = new LocationReqPojo();
 
-      List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
       String[] arr  = table.get(iterations).get("ReqBdy_Types").split("#,#");
       List<String> typ = new ArrayList<String>();
       typ.add(arr[0]);
@@ -49,12 +48,9 @@ public class RequestBuilder {
    }
 
 
-   public UpdateSalesOrderReqPojo UpdateSalesOrder_RequestBuilder(int iterations, String place_id , DataTable dataTable) throws IOException {
+   public UpdateSalesOrderReqPojo UpdateSalesOrder_RequestBuilder(int iterations, String place_id, List<Map<String,String>> table) throws IOException {
 
       updateSalesOrder_ReqPojoObj = new UpdateSalesOrderReqPojo();
-
-      List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
-
       updateSalesOrder_ReqPojoObj.setPlace_id(table.get(iterations).get(place_id));
       updateSalesOrder_ReqPojoObj.setKey(table.get(iterations).get("qaclick123"));
       updateSalesOrder_ReqPojoObj.setAddress(table.get(iterations).get("ReqBdy_Address"));

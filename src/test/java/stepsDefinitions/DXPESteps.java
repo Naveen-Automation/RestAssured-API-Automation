@@ -40,24 +40,29 @@ public class DXPESteps extends BaseSteps{
     private String reqHeaders;
 
     @Given("the user creates a json request body for {string} API with {string} http method using below details {int}")
-    public void Creates_Post_Put_Delete_Request_Body( String apiName, String httpMethod, int iterations, DataTable dataTable) throws Exception
+    public void Creates_Post_Put_Delete_Request_Body(String apiName, String httpMethod, int iterations, DataTable dataTable) throws Exception
     {
+        List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
+        CallRequestBuilderClassMethods(apiName,iterations,table);
+    }
+
+
+    private void CallRequestBuilderClassMethods(String apiName, int iterations, List<Map<String, String>>table) throws Exception {
         String fieldName;
 
-        List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
         reqPathParameters = table.get(iterations).get("ReqPpm");
         reqHeaders = table.get(iterations).get("ReqHdr");
 
         if(reqHeaders == null || reqHeaders.equalsIgnoreCase("N/A") || reqHeaders.equalsIgnoreCase("NA"))
         {
-            reqSpec = RequestSpecification(httpMethod);
+            reqSpec = RequestSpecification();
         }
         else if (reqHeaders.equalsIgnoreCase(""))
         {
-//            reqSpec = AccessKeyRequestSpecification(httpMethod);
+//            reqSpec = AccessKeyRequestSpecification();
         }
 
-        Object[] methodArguments = new Object[]{iterations,dataTable};
+        Object[] methodArguments = new Object[]{iterations,table};
         Util.ExecuteMethodWhenMethodNamePassedAsString (requestBuilder, apiName + "_RequestBuilder", methodArguments);
 
         fieldName = Util.ReplaceFirstUpperCaseCharacterOfTheStringWithLowerCaseOfSameCharacter(apiName) + "_ReqPojoObj";

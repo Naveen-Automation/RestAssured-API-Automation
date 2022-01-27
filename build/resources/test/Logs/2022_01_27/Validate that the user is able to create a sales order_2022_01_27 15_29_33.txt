@@ -1,0 +1,94 @@
+Request method:	POST
+Request URI:	https://rahulshettyacademy.com/maps/api/place/add/json?key=qaclick123
+Proxy:			<none>
+Request params:	<none>
+Query params:	key=qaclick123
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "location": {
+        "lat": 38,
+        "lng": 40
+    },
+    "accuracy": 50,
+    "name": "Veerankis Villah",
+    "phone_number": "9911588999",
+    "address": "1 The Queen, Windsor Castle,UK",
+    "types": [
+        "Castle",
+        "House"
+    ],
+    "website": "http://google.com",
+    "language": "English-UK"
+}
+HTTP/1.1 200 OK
+Date: Thu, 27 Jan 2022 15:27:58 GMT
+Server: Apache/2.4.18 (Ubuntu)
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: POST
+Access-Control-Max-Age: 3600
+Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With
+Content-Length: 194
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: application/json;charset=UTF-8
+
+{
+    "status": "OK",
+    "place_id": "ec1439fdea590ddf20b499b6eb38ffd0",
+    "scope": "APP",
+    "reference": "755264f46f65efc4de825b0d1a59628e755264f46f65efc4de825b0d1a59628e",
+    "id": "755264f46f65efc4de825b0d1a59628e"
+}
+Request method:	POST
+Request URI:	https://rahulshettyacademy.com/maps/api/place/add/json?key=qaclick123
+Proxy:			<none>
+Request params:	<none>
+Query params:	key=qaclick123
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "location": {
+        "lat": 1,
+        "lng": 3
+    },
+    "accuracy": 3,
+    "name": "Naveens Villah",
+    "phone_number": "1234567890",
+    "address": "2 The Queen, Windsor Castle,UK",
+    "types": [
+        "Castle",
+        "House"
+    ],
+    "website": "http://google.com",
+    "language": "English-Brit"
+}
+HTTP/1.1 200 OK
+Date: Thu, 27 Jan 2022 15:28:00 GMT
+Server: Apache/2.4.18 (Ubuntu)
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: POST
+Access-Control-Max-Age: 3600
+Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With
+Content-Length: 194
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: application/json;charset=UTF-8
+
+{
+    "status": "OK",
+    "place_id": "b10b815a427da798a64501a961ca3aa4",
+    "scope": "APP",
+    "reference": "5ffe8906454348a720c14e1ed6342ec25ffe8906454348a720c14e1ed6342ec2",
+    "id": "5ffe8906454348a720c14e1ed6342ec2"
+}
