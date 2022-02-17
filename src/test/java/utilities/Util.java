@@ -98,7 +98,6 @@ public class Util {
     }
 
 
-
     public static Map<String,String> MakeAHashMapFromTwoArrayLists(List<String> header, List<String> valueList)
     {
         Map<String,String> hashMap = new HashMap<>();
@@ -108,5 +107,4 @@ public class Util {
             }
         return hashMap;
     }
-
 }

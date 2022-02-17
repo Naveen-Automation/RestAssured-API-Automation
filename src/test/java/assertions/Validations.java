@@ -8,7 +8,9 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
-public class Validations {
+public class Validations extends BaseValidations
+{
+
     public void CreateSalesOrder_Validations(CreateSalesOrderResPojo resPojoObj, int iterations, DataTable dataTable)
     {
         List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);

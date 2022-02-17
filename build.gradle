@@ -18,26 +18,53 @@ repositories {
 }
 
 
-//allure {
-//    value = '2.15.0'
-//    autoconfigure = false
-//}
-
-
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+    // Cucumber dependency
     implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.2.3'
+
+    //Cucumber + Junit dependency
     testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: '7.2.3'
+
+    //Dependency for Allure Reporting
     implementation group: 'io.qameta.allure', name: 'allure-cucumber7-jvm', version: '2.17.2'
+
+    //Dependency to use rest assured libraries
     testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.4.0'
+
+    //TestNG unit testing framework dependency
     testImplementation group: 'org.testng', name: 'testng', version: '7.4.0'
+
+    //Hamcrest assertion library dependency
     testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
+
+    //Json schema validation dependency
     implementation group: 'io.rest-assured', name: 'json-schema-validator', version: '4.4.0'
+
+    //Dependency to read & write .ini files
     implementation group: 'org.ini4j', name: 'ini4j', version: '0.5.4'
+
+    //GPath implementation dependency
     implementation group: 'com.googlecode.json-simple',  name: 'json-simple',   version: '1.1.1'
+
+    //Jackson Dependency to Anotate, Serialize, Deserialize
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.1'
+
+    //Dependency for using reflection concepts.
     implementation group: 'org.beanshell', name: 'bsh', version: '2.0b5'
+
+    //Dependency to attach logs file to the allure report
+    implementation group: 'io.qameta.allure', name: 'allure-rest-assured', version: '2.17.2'
+
+    //Json schema validation dependency
+    implementation group: 'io.rest-assured', name: 'json-schema-validator', version: '4.5.1'
+
+    // Lombok dependency to reduce pojos size
+    implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
+
+
 }
 
 

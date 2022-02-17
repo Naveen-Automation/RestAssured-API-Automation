@@ -12,6 +12,7 @@ Feature: Sales Order Journey
 
     Then the user should get the status code as 200
     And the elapsed response time should be less than threshold
+    And the user validates the "CreateSalesOrder" API json schema
     And the response json of "CreateSalesOrder" API should match below details <Iterations>
       | ResHdr                 | ReqQpm | ReqPpm | ResBdy_ExpScope | ResBdy_ExpStatus |
       | Apache/2.4.18 (Ubuntu) | N/A    | N/A    | APP             | OK               |

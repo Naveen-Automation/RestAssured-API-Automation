@@ -1,7 +1,7 @@
 package stepsDefinitions;
 
 import assertions.Validations;
-import bsh.EvalError;
+
 import static org.junit.Assert.*;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -14,7 +14,7 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import static io.restassured.RestAssured.given;
 import static java.lang.Integer.parseInt;
-import enums.ServiceEndPoints;
+import endPoints.ServiceEndPoints;
 import pojoClasses.requestPojos.CreateSalesOrderReqPojo;
 import pojoClasses.requestPojos.UpdateSalesOrderReqPojo;
 import pojoClasses.responsePojos.CreateSalesOrderResPojo;
@@ -36,8 +36,7 @@ public class DXPESteps extends BaseSteps{
     private RequestBuilder requestBuilder = new RequestBuilder();
     private ResponseBuilder responseBuilder = new ResponseBuilder();
     private Validations validations = new Validations();
-    private String reqPathParameters;
-    private String reqHeaders;
+
 
     @Given("the user creates a json request body for {string} API with {string} http method using below details {int}")
     public void Creates_Post_Put_Delete_Request_Body(String apiName, String httpMethod, int iterations, DataTable dataTable) throws Exception
@@ -50,17 +49,14 @@ public class DXPESteps extends BaseSteps{
     private void CallRequestBuilderClassMethods(String apiName, int iterations, List<Map<String, String>>table) throws Exception {
         String fieldName;
 
-        reqPathParameters = table.get(iterations).get("ReqPpm");
-        reqHeaders = table.get(iterations).get("ReqHdr");
+        String reqPathParameters = table.get(iterations).get("ReqPpm");
+        if(reqPathParameters == null || reqPathParameters.equalsIgnoreCase("N/A") || reqPathParameters.equalsIgnoreCase("NA"))
+        {
+            reqPathParameters = "";
+        }
+       String reqHeaders = table.get(iterations).get("ReqHdr");
 
-        if(reqHeaders == null || reqHeaders.equalsIgnoreCase("N/A") || reqHeaders.equalsIgnoreCase("NA"))
-        {
-            reqSpec = RequestSpecification();
-        }
-        else if (reqHeaders.equalsIgnoreCase(""))
-        {
-//            reqSpec = AccessKeyRequestSpecification();
-        }
+        reqSpec = GetRequestSpecification(reqHeaders);
 
         Object[] methodArguments = new Object[]{iterations,table};
         Util.ExecuteMethodWhenMethodNamePassedAsString (requestBuilder, apiName + "_RequestBuilder", methodArguments);
@@ -80,23 +76,20 @@ public class DXPESteps extends BaseSteps{
         //Getting the endpoint from the enum
         ServiceEndPoints serviceEndPoint = ServiceEndPoints.valueOf(apiName);
         serviceEndPoint.getEndPoint();
-        if(reqPathParameters == null || reqPathParameters.equalsIgnoreCase("N/A") || reqPathParameters.equalsIgnoreCase("NA"))
-        {
-            reqPathParameters = "";
-        }
+
 
         switch(httpMethod.toUpperCase()) {
             case "POST":
-                response = requestBody.when().post(serviceEndPoint.getEndPoint() + reqPathParameters);
+                response = requestBody.when().post(serviceEndPoint.getEndPoint() + "{reqPathParameters}");
                 break;
             case "PUT":
-                response = requestBody.when().put(serviceEndPoint.getEndPoint()+ reqPathParameters);
+                response = requestBody.when().put(serviceEndPoint.getEndPoint()+ "{reqPathParameters}");
                 break;
             case "GET":
-                response = requestBody.when().get(serviceEndPoint.getEndPoint()+ reqPathParameters);
+                response = requestBody.when().get(serviceEndPoint.getEndPoint()+ "{reqPathParameters}");
                 break;
             case "DELETE":
-                response = requestBody.when().delete(serviceEndPoint.getEndPoint()+ reqPathParameters);
+                response = requestBody.when().delete(serviceEndPoint.getEndPoint()+ "{reqPathParameters}");
                 break;
         }
     }
@@ -105,25 +98,26 @@ public class DXPESteps extends BaseSteps{
     @Then("the user should get the status code as {int}")
     public void Validate_Http_Status_Code(int expstatusCode)
     {
-        int actResponseCode = response.getStatusCode();
-        assertEquals(expstatusCode, actResponseCode);
+        validations.ResponseCodeValidation(expstatusCode, response);
     }
 
     @Then("the elapsed response time should be less than threshold")
     public void ValidateResponseTimeIsUnderThreshold() throws IOException {
-        long actResponseTime = response.getTime();
-        long thresholdResponseTime =  Long.parseLong(IniFileManager.GetKeyValue("Jira", "ThresholdResponseTime", System.getProperty("user.dir") + environmentFilePath));
-        if(actResponseTime < thresholdResponseTime)
-        {
-            assertTrue("Response Time is under threshold " + actResponseTime, true);
-        }
+        validations.ResponseTimeValidations(response);
+    }
+
+    //Method to validate the json Schema
+    @Then("the user validates the {string} API json schema")
+    public void Validate_Json_Schema(String jsonSchemaFileName )
+    {
+        validations.SchemaValidations(jsonSchemaFileName + ".json", response);
     }
 
 
     @Then("the response json of {string} API should match below details {int}")
     public void Validate_Response_Body_With_Expected_Values(String apiName, int iterations, DataTable dataTable) throws Exception {
         String fieldName;
-        resSpec = ResponseSpecification();
+        resSpec = ResponseSpecification(apiName);
         response.then().spec(resSpec);
 
 //      ArrayList of the Arguments of the 'Method' to be executed as a part of 'ExecuteMethodWhenMethodNamePassedAsString' method
