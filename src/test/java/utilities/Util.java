@@ -72,7 +72,7 @@ public class Util {
         if(logsFolderName == null)
         {
             String projectFolderPath = System.getProperty("user.dir");
-            String logsFolderRelativePath = IniFileManager.GetKeyValue("Jira", "LogsPath",  projectFolderPath + BaseSteps.environmentFilePath);
+            String logsFolderRelativePath = IniFileManager.GetKeyValue("Config", "LogsPath",  projectFolderPath + BaseSteps.environmentFilePath) + BaseSteps.getEnvironmentName().toLowerCase() + "//";
             logsFolderName = Util.TimeStamp("yyyy-MM-dd");
             logsFolderPath = projectFolderPath + logsFolderRelativePath + logsFolderName;
         }

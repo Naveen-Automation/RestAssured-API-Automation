@@ -66,7 +66,7 @@ public class DXPESteps extends BaseSteps{
 //      Accessing class fields dynamically using reflection by passing the field name as a string to the 'GetClassFieldTypeOnPassingFieldName' method
         Field field = Util.GetClassFieldTypeOnPassingFieldName(requestBuilder, fieldName);
 
-        requestBody = given().spec(reqSpec).body(field.get(requestBuilder));
+        requestBody = given().spec(reqSpec).body(field.get(requestBuilder)).pathParam("reqPathParameters", reqPathParameters);
     }
 
 

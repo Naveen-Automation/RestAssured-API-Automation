@@ -1,0 +1,51 @@
+<div>POST to https://rahulshettyacademy.com/maps/api/place/add/json</div>
+
+<h4>Body</h4>
+<div>
+    <pre class="preformated-text">
+    {
+    &quot;location&quot;: {
+        &quot;lat&quot;: 1,
+        &quot;lng&quot;: 3
+    },
+    &quot;accuracy&quot;: 3,
+    &quot;name&quot;: &quot;Naveens Villah&quot;,
+    &quot;phone_number&quot;: &quot;1234567890&quot;,
+    &quot;address&quot;: &quot;2 The Queen, Windsor Castle,UK&quot;,
+    &quot;types&quot;: [
+        &quot;Castle&quot;,
+        &quot;House&quot;
+    ],
+    &quot;website&quot;: &quot;http://google.com&quot;,
+    &quot;language&quot;: &quot;English-Brit&quot;
+}
+    </pre>
+</div>
+
+<h4>Headers</h4>
+<div>
+        <div>Accept: */*</div>
+        <div>Content-Type: application/json</div>
+</div>
+
+
+
+<h4>Curl</h4>
+<div>
+curl -v -X POST &#39;https://rahulshettyacademy.com/maps/api/place/add/json&#39; -H &#39;Accept: */*&#39; -H &#39;Content-Type: application/json&#39; -d &#39;{
+    &quot;location&quot;: {
+        &quot;lat&quot;: 1,
+        &quot;lng&quot;: 3
+    },
+    &quot;accuracy&quot;: 3,
+    &quot;name&quot;: &quot;Naveens Villah&quot;,
+    &quot;phone_number&quot;: &quot;1234567890&quot;,
+    &quot;address&quot;: &quot;2 The Queen, Windsor Castle,UK&quot;,
+    &quot;types&quot;: [
+        &quot;Castle&quot;,
+        &quot;House&quot;
+    ],
+    &quot;website&quot;: &quot;http://google.com&quot;,
+    &quot;language&quot;: &quot;English-Brit&quot;
+}&#39;
+</div>
