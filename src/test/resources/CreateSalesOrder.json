@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "default": {},
+  "required": [
+    "status",
+    "place_id",
+    "scope",
+    "reference",
+    "id"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "default": ""
+    },
+    "place_id": {
+      "type": "string",
+      "default": ""
+    },
+    "scope": {
+      "type": "string",
+      "default": ""
+    },
+    "reference": {
+      "type": "string",
+      "default": ""
+    },
+    "id": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "additionalProperties": true
+}

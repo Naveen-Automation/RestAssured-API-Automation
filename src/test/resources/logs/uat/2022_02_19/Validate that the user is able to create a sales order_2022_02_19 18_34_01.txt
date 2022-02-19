@@ -12,22 +12,22 @@ Multiparts:		<none>
 Body:
 {
     "location": {
-        "lat": 1,
-        "lng": 3
+        "lat": 377,
+        "lng": 477
     },
-    "accuracy": 3,
-    "name": "Naveens Villah",
-    "phone_number": "1234567890",
-    "address": "2 The Queen, Windsor Castle,UK",
+    "accuracy": 50,
+    "name": "Veerankis Villah",
+    "phone_number": "9911588999",
+    "address": "1 The Queen, Windsor Castle,UK",
     "types": [
         "Castle",
         "House"
     ],
     "website": "http://google.com",
-    "language": "English-Brit"
+    "language": "English-UK"
 }
 HTTP/1.1 200 OK
-Date: Sat, 19 Feb 2022 17:59:01 GMT
+Date: Sat, 19 Feb 2022 18:32:03 GMT
 Server: Apache/2.4.18 (Ubuntu)
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: POST
@@ -40,8 +40,8 @@ Content-Type: application/json;charset=UTF-8
 
 {
     "status": "OK",
-    "place_id": "3fa9019f2163e29a1e083a67775fc5ea",
+    "place_id": "a9c182fc712c9fabf73a20c742194f53",
     "scope": "APP",
-    "reference": "4e45837816cc20fba464e51fd41edcc14e45837816cc20fba464e51fd41edcc1",
-    "id": "4e45837816cc20fba464e51fd41edcc1"
+    "reference": "4123a3e367bbe3c397efefe9e01ba45a4123a3e367bbe3c397efefe9e01ba45a",
+    "id": "4123a3e367bbe3c397efefe9e01ba45a"
 }
