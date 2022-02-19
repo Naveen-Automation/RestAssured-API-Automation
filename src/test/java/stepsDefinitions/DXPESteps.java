@@ -117,6 +117,7 @@ public class DXPESteps extends BaseSteps{
     @Then("the response json of {string} API should match below details {int}")
     public void Validate_Response_Body_With_Expected_Values(String apiName, int iterations, DataTable dataTable) throws Exception {
         String fieldName;
+
         resSpec = ResponseSpecification(apiName);
         response.then().spec(resSpec);
 
